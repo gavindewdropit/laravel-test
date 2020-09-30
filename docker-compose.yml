@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  ngx:
+    image: nginx:stable-alpine
+    container_name: ngx
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/defualt.conf
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - lar
+
+  mysql:
+    image: mysql:5.7.22
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: usr
+      MYSQL_PASSWORD: pwd
+    ports:
+      - "3306:3306"
+    volumes:
+      - lar_dta:/var/lib/mysql
+    networks:
+      - lar
+
+  php:
+    build:
+      context: ./php/docker
+      dockerfile: Dockerfile
+    container_name: php
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "9000:9000"
+    networks:
+      - lar
+
+networks:
+  lar:
+
+volumes:
+  lar_dta:
