@@ -20,7 +20,6 @@ class CreateUserProfile extends Migration
             $table->integer('hourly_rate');
             $table->string('currency')
             $table->timestamps();
-            
         });
     }
 
