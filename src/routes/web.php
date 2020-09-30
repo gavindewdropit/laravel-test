@@ -13,10 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
+Route::view('/', 'home');
+Route::get('/users', function () 
+{
+	return view('userNew');
 });
-
-Route::get('/test', function () {
-	return phpinfo();
-});
+Route::post('/users', [App\Http\Controllers\userController::class, 'create']);
