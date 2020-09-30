@@ -13,13 +13,13 @@ class CreateUserProfile extends Migration
      */
     public function up()
     {
-        Schema::create('user_profile', function (Blueprint $table) {
+        Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreign('user_id')->constrained();
             $table->longText('description');
             $table->integer('hourly_rate');
-            $table->string('currency')
+            $table->string('currency');
             $table->timestamps();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
 

@@ -10,4 +10,5 @@
 				<p class="rate" id="rate">Hourly Rate: </p>
 			</div>
 		</div>
+	</div>
 @endsection
