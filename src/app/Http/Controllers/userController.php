@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 
 class userController extends Controller
@@ -24,7 +25,7 @@ class userController extends Controller
      */
     public function create()
     {
-        //
+        return view('userNew',['menu' => 'hidden']);
     }
 
     /**
@@ -35,7 +36,22 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $user = new User;
+        $profile = new UserProfile;
+
+        $user->name = $input['name'];
+        $user->email = $input['email'];
+        $user->password = $input['pwd'];
+        $user->save();
+
+        $profile->description = $input['desc'];
+        $profile->hourly_rate = $input['rate'];
+        $profile->currency = $input['cur'];
+        $profile->user_id = $user->id;
+        $profile->save();
+
+        return redirect()->route('home');
     }
 
     /**
