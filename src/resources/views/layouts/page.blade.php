@@ -9,7 +9,7 @@
 			@include('partials.menu')
 		</div>
 	</div>
-	<div class="main-content">
+	<div class="main-content mt-4">
 		@yield('main-content')
 	</div>
 @endsection
