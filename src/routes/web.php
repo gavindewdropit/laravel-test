@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/user/create', [App\Http\Controllers\userController::class, 'create']);
+Route::get('/user/edit/{id}', [App\Http\Controllers\userController::class, 'edit']);
 Route::patch('/user/update/{id}', [App\Http\Controllers\userController::class, 'update']);
 Route::delete('/user/delete/{id}', [App\Http\Controllers\userController::class, 'destroy']);
 Route::get('/user/show/{id}', [App\Http\Controllers\userController::class, 'show']);

@@ -60,9 +60,11 @@ class userController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, $id)
     {
-        //
+        $user = User::with('profile')->find($id);
+
+        return view("userShow",['user' => $user, 'menu' => 'show']);
     }
 
     /**
@@ -71,9 +73,12 @@ class userController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        $user = User::with('profile')->find($id);
+        $menu = 'hidden';
+
+        return view('forms.userUpdate', compact('user','menu'));
     }
 
     /**
@@ -83,9 +88,27 @@ class userController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $profile = UserProfile::where("user_id", $id)->get();
+        $input = $request->all();
+
+        $user->name = $input['name'];
+        $user->email = $input['email'];
+        if ($input['pwd'])
+        {
+            $user->password = $input['pwd'];
+        }
+        $user->save();
+
+        $profile->description = $input['desc'];
+        $profile->hourly_rate = $input['rate'];
+        $profile->currency = $input['cur'];
+        $profile->user_id = $id;
+        $profile->push();
+
+        return redirect("/user/show/$id");
     }
 
     /**
@@ -94,8 +117,12 @@ class userController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        $user->delete();
+
+        return redirect("/");
     }
 }

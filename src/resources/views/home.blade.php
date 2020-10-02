@@ -5,7 +5,7 @@
 	@foreach ($users as $user)
 	<a href="/user/show/{{$user->id}}">
 		<div class="card mt-2" style="max-width: 300px;">
-			<img src="storage/userimages/img_avatar1.png" alt="" class="card-img-top">
+			<img src="/storage/userimages/img_avatar1.png" alt="" class="card-img-top">
 			<div class="card-body">
 				<h4 class="card-title">{{$user->name}}</h4>
 				@if ($user->profile)
