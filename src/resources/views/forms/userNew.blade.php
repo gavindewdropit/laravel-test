@@ -47,6 +47,7 @@
 			</div>
 		</div>
 		<button type="submit" class="btn btn-primary ml-4 mt-4">Save New User</button>
+		<a href="/" class="btn btn-primary ml-4 mt-4" role="button">Cancel</a>
 	</form>
 </div>
 @endsection
