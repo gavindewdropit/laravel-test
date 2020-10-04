@@ -40,12 +40,6 @@
 				<option value="USD">USD</option>
 			</select>
 		</div>
-		<div class="form-group row mt-4">
-			<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-			<div class="col-sm-10">
-				<input name="pwd" type="password" class="form-control" id="inputPassword" required>
-			</div>
-		</div>
 		<button type="submit" class="btn btn-primary ml-4 mt-4">Save New User</button>
 		<a href="/" class="btn btn-primary ml-4 mt-4" role="button">Cancel</a>
 	</form>

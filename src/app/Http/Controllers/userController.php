@@ -42,7 +42,6 @@ class userController extends Controller
 
         $user->name = $input['name'];
         $user->email = $input['email'];
-        $user->password = $input['pwd'];
         $user->save();
 
         $profile->description = $input['desc'];
@@ -63,6 +62,24 @@ class userController extends Controller
     public function show(User $user, $id)
     {
         $user = User::with('profile')->find($id);
+
+        $useconvertor = new UseConvertor;
+        $convertor = $useconvertor->use_convertor('ApiCurrencyConvertor');
+        if ($user->profile->currency != "GBP") {
+            $user->profile->rate_gbp = $convertor->convert($user->profile->currency, "GBP", $user->profile->hourly_rate);
+        }else{
+            $user->profile->rate_gbp = $user->profile->hourly_rate;
+        }
+        if ($user->profile->currency != "EUR") {
+            $user->profile->rate_eur = $convertor->convert($user->profile->currency, "EUR", $user->profile->hourly_rate);
+        }else{
+            $user->profile->rate_eur = $user->profile->hourly_rate;
+        }
+        if ($user->profile->currency != "USD") {
+            $user->profile->rate_usd = $convertor->convert($user->profile->currency, "USD", $user->profile->hourly_rate);
+        }else{
+            $user->profile->rate_usd = $user->profile->hourly_rate;
+        }
 
         return view("userShow",['user' => $user, 'menu' => 'show']);
     }
@@ -125,4 +142,14 @@ class userController extends Controller
 
         return redirect("/");
     }
+
+    public function rates()
+    {
+        $useconvertor = new UseConvertor;
+        $convertor = $useconvertor->use_convertor();
+        $val = $convertor->convert('GBP','USD', 34);
+        echo $val;
+        dd($convertor);
+    }
+
 }
