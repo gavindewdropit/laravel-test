@@ -20,3 +20,4 @@ Route::patch('/user/update/{id}', [App\Http\Controllers\userController::class, '
 Route::delete('/user/delete/{id}', [App\Http\Controllers\userController::class, 'destroy']);
 Route::get('/user/show/{id}', [App\Http\Controllers\userController::class, 'show']);
 Route::post('/users', [App\Http\Controllers\userController::class, 'store']);
+

@@ -15,7 +15,10 @@
 		</div>
 		<div>
 			<h4>Hourly Rate:</h4>
-			<p>{{$user->profile->currency}} {{$user->profile->hourly_rate}}</p>
+			<p class="rate" id="rate">{{$user->profile->currency}} {{$user->profile->hourly_rate}}</p>
+				<p class="rate_gbp" id="rate_gbp" style="display: none;">GBP {{$user->profile->rate_gbp}}</p>
+				<p class="rate_eur" id="rate_eur" style="display: none;">EUR {{$user->profile->rate_eur}}</p>
+				<p class="rate_usd" id="rate_usd" style="display: none;">USD {{$user->profile->rate_usd}}</p>
 		</div>
 	</div>
 	<div class="d-flex justify-content-between ml-4 col-2">
